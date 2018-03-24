@@ -9,7 +9,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_new_content_twitter"
+        android:id="@+id/info"
         android:orderInCategory="200"
         android:title="About"
         android:icon="@drawable/ic_info_outline_black_24dp"

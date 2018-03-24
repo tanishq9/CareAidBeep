@@ -28,8 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="TITLE"
                     android:textColor="#000"
-                    android:textSize="45dp"
-                    android:textStyle="bold" />
+                    android:textSize="32dp" />
 
                 <TextView
                     android:id="@+id/time"
@@ -37,8 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="TIME"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="20dp"/>
 
             </LinearLayout>
             <TextView

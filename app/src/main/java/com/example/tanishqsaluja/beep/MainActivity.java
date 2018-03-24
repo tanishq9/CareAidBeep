@@ -1,26 +1,20 @@
 package com.example.tanishqsaluja.beep;
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TimePicker;
-
-import com.example.tanishqsaluja.beep.Receiver.MyReceiver;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG ="WEtheBest" ;
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
 
@@ -36,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,ConfigurePButtonActivity.class));
             }
         });
+
+
+        if(isServiceRunning(BeeperService.class)){
+            Log.e(TAG, "onCreate:isserviceRunning:true " );
+            stopService(new Intent(this,BeeperService.class));
+        }
+
+
+
     }
 
     public void on_rms_click(View view) {
@@ -62,7 +65,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private boolean isServiceRunning(Class<?> serviceClass){
+        ActivityManager manager= (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for(ActivityManager.RunningServiceInfo infos:manager.getRunningServices(Integer.MAX_VALUE)){
+            if(serviceClass.getName().equals(infos.service.getClassName())){
+                return true;
+            }
+        }
+
+        return  false;
+
+    }
+
+
 }
+
 /*
 
         */
