@@ -1,4 +1,4 @@
-package com.example.tanishqsaluja.beep
+package com.example.tanishqsaluja.beep.DB
 
 /**
  * Created by tanishqsaluja on 16/3/18.

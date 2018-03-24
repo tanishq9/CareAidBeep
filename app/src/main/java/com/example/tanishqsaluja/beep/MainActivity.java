@@ -1,26 +1,22 @@
 package com.example.tanishqsaluja.beep;
 
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import com.example.tanishqsaluja.beep.Receiver.MyReceiver;
 
 import java.util.Calendar;
 
@@ -31,12 +27,50 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_config);
 
-        /*AudioManager am = (AudioManager)getSystemService(this.AUDIO_SERVICE);
+        Button button= findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ConfigurePButtonActivity.class));
+            }
+        });
+    }
+
+    public void on_rms_click(View view) {
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.info){
+            // do something
+            Intent intent=new Intent(MainActivity.this,InfoAct.class);
+            startActivity(intent);
+        }
+        if(id==R.id.scheduler){
+            Intent intent=new Intent(MainActivity.this,MedicineActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
+/*
+
+        */
+/*AudioManager am = (AudioManager)getSystemService(this.AUDIO_SERVICE);
         if(am.isMusicActive()){
 
-        }*/
+        }*//*
+
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
         if(notificationManager!=null){
             notificationManager.cancelAll();
@@ -73,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     private void setAlarm(TimePicker timePicker){
         alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent pendingIntent=new Intent(MainActivity.this,MyReceiver.class);
-        // pendingIntent.putExtra("notesdb", (Parcelable) ndb);
         Calendar calendar=Calendar.getInstance();
         if(Build.VERSION.SDK_INT>=23) {
             calendar.set(
@@ -120,3 +153,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+*/

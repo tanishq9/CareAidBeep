@@ -1,4 +1,4 @@
-package com.example.tanishqsaluja.beep;
+package com.example.tanishqsaluja.beep.DB;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,14 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-
-import static com.example.tanishqsaluja.beep.TableContract.DESCRIPTION;
-import static com.example.tanishqsaluja.beep.TableContract.HOUR;
-import static com.example.tanishqsaluja.beep.TableContract.ID;
-import static com.example.tanishqsaluja.beep.TableContract.ISDONE;
-import static com.example.tanishqsaluja.beep.TableContract.MINUTE;
-import static com.example.tanishqsaluja.beep.TableContract.TABLE_NAME;
-import static com.example.tanishqsaluja.beep.TableContract.TITLE;
 
 /**
  * Created by tanishqsaluja on 16/3/18.
@@ -28,7 +20,7 @@ public class NotesDB extends SQLiteOpenHelper {
 
     public static final String DB_NAME="notesdb";
     public static final int DB_VERSION=5;
-    public static final String DROP=" DROP TABLE IF EXISTS "+TABLE_NAME;
+    public static final String DROP=" DROP TABLE IF EXISTS "+ TableContract.TABLE_NAME;
 
     public NotesDB(Context context) {
         super(context, DB_NAME, null,DB_VERSION);
@@ -45,7 +37,7 @@ public class NotesDB extends SQLiteOpenHelper {
 
     public ArrayList<Note> getAllNotes(){
         Cursor c=getReadableDatabase().query(
-                TABLE_NAME,
+                TableContract.TABLE_NAME,
                 null,
                 null,
                 null,
@@ -72,7 +64,7 @@ public class NotesDB extends SQLiteOpenHelper {
     public Note getNoteFromId(int id){
         SQLiteDatabase sqLiteDatabase=getReadableDatabase();
         Cursor c=sqLiteDatabase.query(
-                TABLE_NAME,
+                TableContract.TABLE_NAME,
                 null,
                 TableContract.ID=" =? ",
                 new String[]{String.valueOf(id)},
@@ -95,19 +87,19 @@ public class NotesDB extends SQLiteOpenHelper {
 
     public int deleteRow(String title){
         SQLiteDatabase sqLiteDatabase=getWritableDatabase();
-        int count=sqLiteDatabase.delete(TABLE_NAME,TITLE+"=?", new String[]{title});
+        int count=sqLiteDatabase.delete(TableContract.TABLE_NAME, TableContract.TITLE+"=?", new String[]{title});
         return count;
     }
 
     public void insertNote(Note note){
         ContentValues contentValues=new ContentValues();
-        contentValues.put(ID,note.getId());
-        contentValues.put(TITLE,note.getTitle());
-        contentValues.put(DESCRIPTION,note.getDesc());
-        contentValues.put(ISDONE,note.getIsdone());
-        contentValues.put(HOUR,note.getHour());
-        contentValues.put(MINUTE,note.getMinute());
-        getWritableDatabase().insert(TABLE_NAME,null,contentValues);
+        contentValues.put(TableContract.ID,note.getId());
+        contentValues.put(TableContract.TITLE,note.getTitle());
+        contentValues.put(TableContract.DESCRIPTION,note.getDesc());
+        contentValues.put(TableContract.ISDONE,note.getIsdone());
+        contentValues.put(TableContract.HOUR,note.getHour());
+        contentValues.put(TableContract.MINUTE,note.getMinute());
+        getWritableDatabase().insert(TableContract.TABLE_NAME,null,contentValues);
     }
 
     @Override

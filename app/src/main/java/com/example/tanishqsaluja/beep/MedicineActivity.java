@@ -7,19 +7,19 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.support.v7.widget.SearchView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.tanishqsaluja.beep.DB.Note;
+import com.example.tanishqsaluja.beep.DB.NotesDB;
+import com.example.tanishqsaluja.beep.Receiver.TaskReceiver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -125,7 +125,7 @@ public class MedicineActivity extends AppCompatActivity {//implements SearchView
     }*/
     private void setAlarm(TimePicker timePicker,String title,Integer id,NotesDB ndb){
         alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent pendingIntent=new Intent(MedicineActivity.this,MyReceiver.class);
+        Intent pendingIntent=new Intent(MedicineActivity.this,TaskReceiver.class);
         pendingIntent.putExtra("title",title);
         pendingIntent.putExtra("noteid",id);
         // pendingIntent.putExtra("notesdb", (Parcelable) ndb);

@@ -4,6 +4,16 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +30,11 @@
         </activity>
         <activity android:name=".DescActivity"></activity>
         <activity android:name=".MedicineActivity"></activity>
-        <receiver android:name=".MyReceiver" android:enabled="true" android:exported="true"></receiver>
+        <activity android:name=".InfoAct"></activity>
+        <activity android:name=".ConfigurePButtonActivity"></activity>
+        <activity android:name=".SearchDevicesActivity"></activity>
+        <receiver android:name=".Receiver.MyReceiver" android:enabled="true" android:exported="true"></receiver>
+        <receiver android:name=".Receiver.TaskReceiver" android:enabled="true" android:exported="true"></receiver>
     </application>
 
 </manifest>

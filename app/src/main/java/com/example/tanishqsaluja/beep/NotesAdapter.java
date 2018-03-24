@@ -2,6 +2,7 @@ package com.example.tanishqsaluja.beep;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,7 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tanishqsaluja.beep.DB.Note;
+import com.example.tanishqsaluja.beep.DB.NotesDB;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by tanishqsaluja on 16/3/18.
@@ -58,6 +67,35 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
         }else{
             holder.time.setText(note.getHour()+":"+note.getMinute()+" AM");
         }
+
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df;
+
+        df = new SimpleDateFormat("kk:mm");
+        String currTime = df.format(c.getTime());
+
+        String check=""+note.getHour()+":"+note.getMinute();
+        Log.e(TAG, "onBindViewHolder: check:"+check );
+        Log.e(TAG, "onBindViewHolder: formattedTime:"+currTime );
+        try {
+
+            if(df.parse(currTime).compareTo(df.parse(check))>=0) {
+                holder.time.setTextColor(Color.GRAY);
+                holder.title.setTextColor(Color.GRAY);
+            }
+
+            else{
+
+                holder.time.setTextColor(Color.BLACK);
+                holder.title.setTextColor(Color.BLACK);
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         holder.title.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -107,7 +145,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesHolder>
             title=itemView.findViewById(R.id.title);
           //  title=itemView.findViewById(R.id.title);
             time=itemView.findViewById(R.id.time);
-            //done=itemView.findViewById(R.id.done);
+            done=itemView.findViewById(R.id.done);
             Log.e("TEST","VIEWHOLDER");
         }
     }
