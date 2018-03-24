@@ -52,9 +52,9 @@ public class MyReceiver extends BroadcastReceiver {
                 .setLights(Color.RED,3000,3000)
                 //.setSound(defSound)
                 .setOngoing(true)
-               // .setAutoCancel(false)
+                .setAutoCancel(false)
                 .build();
-       notification.sound = Uri.parse("android.resource://"+context.getPackageName()+"/"+R.raw.ring);
+       notification.sound = Uri.parse("android.resource://"+context.getPackageName()+"/"+R.raw.ringme);
 
 /*
         MediaPlayer player = MediaPlayer.create(context,R.raw.ring);
