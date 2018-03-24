@@ -13,8 +13,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.telecom.Call;
 import android.util.Log;
+
+import java.util.Locale;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -23,6 +27,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 
 public class MyReceiver extends BroadcastReceiver {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceive(Context context, Intent intent) {
    /*     Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -44,13 +49,12 @@ public class MyReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent= PendingIntent.getActivity(context, (int) System.currentTimeMillis(),i,0);
         Notification notification = new NotificationCompat.Builder(context, "test")
                 .setContentTitle("Time for the task: "+intent.getStringExtra("title"))
-                //.setDefaults(Notification.DEFAULT_VIBRATE)
-                //.setPriority(Notification.PRIORITY_MAX)
-                .setVibrate(new long[] { 0, 5000,1000,5000,1000 })
+            //    .setPriority(Notification.PRIORITY_MAX)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setLights(Color.RED,3000,3000)
-                //.setSound(defSound)
+                .setCategory(Notification.CATEGORY_CALL)
+                .setDefaults(Notification.FLAG_INSISTENT)
                 .setOngoing(true)
                 .setAutoCancel(false)
                 .build();
@@ -65,8 +69,6 @@ public class MyReceiver extends BroadcastReceiver {
 //            player.stop();
 //        }
 
-        notification.defaults|= Notification.DEFAULT_LIGHTS;
-        notification.defaults|= Notification.DEFAULT_VIBRATE;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(123, notification);
     }
