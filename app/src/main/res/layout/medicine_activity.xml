@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tap + button to add task"
+        android:text="Tap + button to add medicine details"
         android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold" />
@@ -18,7 +18,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Long Press Title to delete Task"
+        android:text="Long Press Title to delete reminder"
         android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold" />
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Tap Title to view the description"
+        android:text="Tap Medicine to view the description"
         android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold" />
