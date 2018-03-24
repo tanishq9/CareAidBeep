@@ -49,7 +49,7 @@ public class MyReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent= PendingIntent.getActivity(context, (int) System.currentTimeMillis(),i,0);
         Notification notification = new NotificationCompat.Builder(context, "test")
                 .setContentTitle("Time for the task: "+intent.getStringExtra("title"))
-            //    .setPriority(Notification.PRIORITY_MAX)
+                .setPriority(Notification.PRIORITY_MAX)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setLights(Color.RED,3000,3000)

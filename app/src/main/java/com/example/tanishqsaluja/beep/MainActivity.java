@@ -1,6 +1,8 @@
 package com.example.tanishqsaluja.beep;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,9 +11,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -32,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         if(am.isMusicActive()){
 
         }*/
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
+        if(notificationManager!=null){
+            notificationManager.cancelAll();
+        }
+        //notificationManager.notify(123, notification);
         FloatingActionButton fab=findViewById(R.id.fab);
         View dialogView=getLayoutInflater().inflate(R.layout.alert_dialog,null,false);
         final TimePicker timePicker=dialogView.findViewById(R.id.time);
@@ -92,5 +102,21 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC,calendar.getTimeInMillis(),alarmIntent);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.settings){
+            Intent intent=new Intent(MainActivity.this,MedicineActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
